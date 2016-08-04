@@ -1,5 +1,5 @@
 """
-    Shows applicatio of higher order functions and
+    Shows application of higher order functions and
     closures in decorators.
 """
 
