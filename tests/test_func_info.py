@@ -4,14 +4,25 @@
 """
 
 import sys
-sys.path.insert(0, '../')
+sys.path.insert(1, '../')
 
-from lib.db_utils import func_info
+from lib.db_utils import func_info, class_info
 
 @func_info # Using the decorator syntax
 def print_names(names, **kwargs):
     pass
 
+@class_info
+class Test(object):
+    """
+    Test class for testing class decorator.
+    """
+    def __init__(self, dummy):
+        self.dummy = dummy
+    
+    def test(self, a, *args, **kwargs):
+        pass
+    
 if __name__ == '__main__':
     print_names(['Benny', 'Kenny', 'Oscar'], roll = 'students')
 
@@ -22,9 +33,16 @@ if __name__ == '__main__':
     del area
     '''Even though we delete 'area' the lambda expression contained in
         'area' is bound to the func_info.'''
-    print call(3, 9)
+    print(call(3, 9))
 
     '''
     You can write like this, but think about readability as well!
         print func_info(lambda l, b: l * b)(2, 9)
     '''
+
+    t = Test(100)
+    print(t.dummy)
+    t.test(10, host='localhost')
+    t.test(10, 20, host='localhost')
+    print(t.__doc__)
+    
