@@ -18,18 +18,18 @@ Use this to trace functions.
 A metaclass to trace the entry, exit and parameters for class methods.
 Use this to trace class methods.
 
-	'''python
-		#for 2.7.x
-		class ClassToTrace(object):
-			__metaclass__ = ClassInfoMetaclass 			
-			...
+    '''python  
+		#for 2.7.x  
+		class ClassToTrace(object):  
+			__metaclass__ = ClassInfoMetaclass  	
+			...  
 	'''
 
-	'''python
-		#for 3.5.x
-		class ClassToTrace(object, metaclass = ClassInfoMetaclass):
-			...
-	'''
+    '''python  
+		#for 3.5.x  
+		class ClassToTrace(object, metaclass = ClassInfoMetaclass):  
+			...  
+	'''  
  
  
  
