@@ -6,17 +6,16 @@
 import sys
 sys.path.insert(1, '../')
 
-from lib.db_utils import func_info, class_info
+from lib.db_utils import func_info, ClassInfoMetaclass
 
-@func_info # Using the decorator syntax
+@func_info
 def print_names(names, **kwargs):
     pass
 
-@class_info
-class Test(object):
+class Test(object, metaclass = ClassInfoMetaclass):
     """
     Test class for testing class decorator.
-    """
+    """ 
     def __init__(self, dummy):
         self.dummy = dummy
     

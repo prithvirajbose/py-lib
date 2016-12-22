@@ -3,10 +3,11 @@ Debug utilities.
 """
 
 from functools import wraps, update_wrapper
+from types import FunctionType
 
 def func_info(f):
     """
-    A generic trace function to trace the entry, exit
+    A trace function to trace the entry, exit
     and parameters for functions.
     """
     @wraps(f)
@@ -40,7 +41,7 @@ def _analyse_args(f, *args, **kwargs):
 
 def class_info(cls):
     """
-    A generic trace function to trace the entry, exit
+    A trace function to trace the entry, exit
     and parameters for class methods.
     """
     class WrapperCls(object):
@@ -58,4 +59,17 @@ def class_info(cls):
     return WrapperCls
 
 
-
+class ClassInfoMetaclass(type):
+    """
+    A metaclass to trace the entry, exit
+    and parameters for class methods.
+    """
+    def __new__(meta, classname, baseclasses, classdict):
+        new_classdict = {}
+        for attrib_name, attrib in classdict.items():
+            #wrap non-magic callable methods.
+            if callable(attrib) and attrib_name.startswith('__') == False:
+                attrib = func_info(attrib)
+            new_classdict[attrib_name] = attrib
+        return type.__new__(meta, classname, baseclasses, new_classdict)
+        
